@@ -4,5 +4,5 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def main(req):
-    return HttpResponse("<h2>PyCity</h2>")
+def main(request):
+    return render(request, 'home.html')
