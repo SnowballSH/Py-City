@@ -5,32 +5,69 @@ from dataclasses import dataclass
 
 @dataclass
 class FFile:
+    """FFile: the File class
+    """
     name: str
     stat: tuple
 
 
 @dataclass
 class FFolder:
+    """FFile: the Folder class
+    """
     name: str
     files: any
     folders: any
 
 
 def scan_path(path):
+    """Scan all files
+
+    Args:
+        path (str): path
+
+    Returns:
+        generator: Tuple of all file path
+    """
     return (f.path for f in os.scandir(path) if f.is_file())
 
 
-def scan_path_dict(path):
+def scan_dir(path):
+    """Scan all directories
+
+    Args:
+        path (str): path
+
+    Returns:
+        generator: Tuple of all folder path
+    """
     return (f.path for f in os.scandir(path) if f.is_dir())
 
 
 def scan_whole(path):
+    """Scan the whole directory
+
+    Args:
+        path (str): path
+
+    Returns:
+        tuple: filepaths and dirpaths
+    """
     filepaths = scan_path(path)
-    dirpaths = scan_path_dict(path)
+    dirpaths = scan_dir(path)
     return filepaths, dirpaths
 
 
 def scan(path):
+    """Main scan function
+
+    Args:
+        path (str): the path of folder
+
+    Returns:
+        FFolder: FFolder object of the folder, 
+        containing all analyzed information
+    """
     filepaths, dirpaths = scan_whole(path)
     l = []
     for file in filepaths:
