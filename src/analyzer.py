@@ -19,6 +19,16 @@ def analyze(code):
     var_count = 0
     while chunk:
         # string
+        res = re.match(r"('''(\\'|[^'])*''')", chunk)
+        if res:
+            chunk = chunk[res.end():]
+            continue
+
+        res = re.match(r'("""(\\"|[^"])*""")', chunk)
+        if res:
+            chunk = chunk[res.end():]
+            continue
+
         res = re.match(r'("(\\"|[^\n\r"])*")', chunk)
         if res:
             chunk = chunk[res.end():]
