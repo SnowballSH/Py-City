@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 
 def main(req):
-    return HttpResponse("PyCity")
+    return HttpResponse("<h2>PyCity</h2>")
