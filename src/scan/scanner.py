@@ -1,5 +1,5 @@
 import os
-import analyzer
+from . import analyzer
 from dataclasses import dataclass
 
 
@@ -29,7 +29,9 @@ def scan_path(path):
     Returns:
         generator: Tuple of all file path
     """
-    return (f.path for f in os.scandir(path) if f.is_file())
+    return (f.path for f in os.scandir(path) if f.is_file() and
+            any((f.path.endswith('.py'), f.path.endswith(
+                '.pyx', f.path.endswith('.pyc')))))
 
 
 def scan_dir(path):
@@ -65,7 +67,7 @@ def scan(path):
         path (str): the path of folder
 
     Returns:
-        FFolder: FFolder object of the folder, 
+        FFolder: FFolder object of the folder,
         containing all analyzed information
     """
     filepaths, dirpaths = scan_whole(path)
