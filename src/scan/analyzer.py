@@ -49,7 +49,7 @@ def analyze(code):
             continue
 
         # variable
-        res = re.match(r'(\w+\s*(:\s*\w+)?\s*=\s*.+)', chunk)
+        res = re.match(r'((\w+\s*\.\s*)*\w+\s*(:\s*\w+)?\s*=\s*.+)', chunk)
         if res:
             var_count += 1
             chunk = chunk[res.end():]
