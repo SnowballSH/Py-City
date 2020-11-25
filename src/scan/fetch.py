@@ -3,7 +3,7 @@ import os
 
 
 def clone(url):
-    path = f'{os.getcwd()}\\scan\\cache'
+    path = f'{os.getcwd()}\\src\\scan\\cache'
     name = url.split("/")[-1].split(".")[0]
     dirs = list(map(lambda x: x.path, filter(
         os.DirEntry.is_dir, os.scandir(path))))
