@@ -11,12 +11,15 @@ def analyze(code):
         tuple of:
             length of code,
             number of lines,
-            amount of variables
+            amount of variables,
+            amount of functions
     """
 
     code = code.strip()
     chunk = code
     var_count = 0
+    func_count = 0
+    class_count = 0
     while chunk:
         # string
         res = re.match(r"('''(\\'|[^'])*''')", chunk)
@@ -52,9 +55,23 @@ def analyze(code):
             chunk = chunk[res.end():]
             continue
 
+        # function
+        res = re.match(r'(def\s*\w+\s*\([^\n\r]*\)\s*:)', chunk)
+        if res:
+            func_count += 1
+            chunk = chunk[res.end():]
+            continue
+
+        # class
+        res = re.match(r'(class\s*\w+(\s*\([^\n\r]*\))?\s*:)', chunk)
+        if res:
+            class_count += 1
+            chunk = chunk[res.end():]
+            continue
+
         chunk = chunk[1:]
 
-    return len(code), len(code.split('\n')), var_count
+    return len(code), len(code.split('\n')), var_count, func_count, class_count
 
 
 if __name__ == "__main__":

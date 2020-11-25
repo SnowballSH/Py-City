@@ -43,7 +43,7 @@ def scan_dir(path):
     Returns:
         generator: Tuple of all folder path
     """
-    return (f.path for f in os.scandir(path) if f.is_dir())
+    return (f.path for f in os.scandir(path) if f.is_dir() and not f.path.endswith('.git'))
 
 
 def scan_whole(path):

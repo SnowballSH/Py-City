@@ -8,4 +8,4 @@ def analyze(url):
 
 
 if __name__ == "__main__":
-    print(analyze("https://github.com/SnowballSH/Snow-lang.git"))
+    print(analyze("https://github.com/SnowballSH/BFCT.git"))
