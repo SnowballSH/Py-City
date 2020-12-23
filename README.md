@@ -21,6 +21,8 @@ python main.py
 
 (Wait a few seconds patiently, because the program needs to pull the repo)
 
+### Hold the right click of your mouse to rotate the scene!!
+
 Make sure you are in the root directory of Py-City!
 
 #### The current main.py lets you view the [source repo](https://github.com/SnowballSH/Snow-lang) of **the Snow Programming Language**
