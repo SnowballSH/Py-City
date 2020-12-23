@@ -4,7 +4,7 @@
 With this project, you can analyze and view your 
 python github repositories in a different way!
 
-![example - twtcodejam.net](https://cdn.discordapp.com/attachments/597175122222252038/791432562429263872/unknown.png)
+![example - snow lang](https://cdn.discordapp.com/attachments/597175122222252038/791432562429263872/unknown.png)
 
 ---
 
@@ -23,8 +23,8 @@ python main.py
 
 Make sure you are in the root directory of Py-City!
 
-#### The current main.py lets you view the [source repo](https://github.com/Tech-With-Tim/twtcodejam.net) of [twtcodejam.net](https://twtcodejam.net/)
-(Feel free to check the repo out, I have contributed to some parts of it too!)
+#### The current main.py lets you view the [source repo](https://github.com/SnowballSH/Snow-lang) of **the Snow Programming Language**
+(Which I made myself)
 
 #### If you want to analyze another repo, change main.py to
 ```python
