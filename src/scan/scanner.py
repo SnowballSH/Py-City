@@ -1,6 +1,16 @@
-import os
 from . import analyzer
 from dataclasses import dataclass
+from typing import List
+from randomcolor import *
+
+from ursina import *
+
+
+def grc():
+    return map(int,
+               RandomColor().generate(
+                   luminosity=random.choice(("light", "bright")), format_="rgb", count=1
+               )[0][4:-1].split(', '))
 
 
 @dataclass
@@ -10,14 +20,52 @@ class FFile:
     name: str
     stat: tuple
 
+    def add_text(self, num=0, line=0, zdepth=0):
+        fn = '/'.join(self.name.split('\\')[-2:])
+        txt = f"""
+.../{fn}
+length: {self.stat[0]}
+lines: {self.stat[1]}
+variables: {self.stat[2]}
+functions: {self.stat[3]}
+""".strip().split('\n')
+
+        txtlen = max(len(g) for g in txt)
+        for i in range(len(txt)):
+            txt[i] = txt[i].ljust(txtlen, ' ')
+
+        bt = Button(
+            model='cube',
+            parent=scene,
+            x=num / 0.8 - 2,
+            y=line / 0.8 - 2,
+            z=zdepth / 0.8 - 2,
+            color=color.rgb(*grc()),
+            scale=(0.6, 0.6, 0.6),
+            tooltip=Tooltip(
+                text=' '.join(txt),
+                wordwrap=5),
+            enabled=True)
+
+        return bt
+
 
 @dataclass
 class FFolder:
     """FFile: the Folder class
     """
     name: str
-    files: any
-    folders: any
+    files: List[FFile]
+    folders: list
+
+    def add_text(self, display=True, depth=0, zdepth=0):
+        fn = "Project: " + self.name.split('\\')[-1]
+        x = Text(text=fn, origin=(-0.5 + len(fn) / 40, -5), scale=3) if display else None
+        for i, u in enumerate(self.files):
+            u.add_text(i, depth, zdepth)
+        for i, u in enumerate(self.folders):
+            u.add_text(False, depth + 1, i)
+        return x
 
 
 def scan_path(path):
@@ -85,6 +133,7 @@ def scan(path):
 if __name__ == "__main__":
     res = scan('sample')
     import pprint
+
     pp = pprint.PrettyPrinter(indent=4)
 
     pp.pprint(vars(res))
