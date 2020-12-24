@@ -7,10 +7,9 @@ from ursina import *
 
 
 def grc():
-    return map(int,
-               RandomColor().generate(
-                   luminosity=random.choice(("light", "bright")), format_="rgb", count=1
-               )[0][4:-1].split(', '))
+    return RandomColor().generate(
+        luminosity=random.choice(("light", "bright")), format_="hex", count=1
+    )
 
 
 @dataclass
@@ -40,7 +39,7 @@ functions: {self.stat[3]}
             x=num / 0.8 - 2,
             y=line / 0.8 - 2,
             z=zdepth / 0.8 - 2,
-            color=color.rgb(*grc()),
+            color=color.hex(*grc()),
             scale=(0.6, 0.6, 0.6),
             tooltip=Tooltip(
                 text=' '.join(txt),
